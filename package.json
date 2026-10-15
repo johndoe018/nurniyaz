@@ -6,7 +6,7 @@
   "description": "A differentiated quadratic-equations learning lab by Moldash Bekarys.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "vite build && node scripts/prepare-pages.mjs",
     "preview": "vite preview --host 0.0.0.0",
     "test": "node --test tests/*.test.js"
   },

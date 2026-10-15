@@ -91,13 +91,17 @@ The checks exercise the real production page: three levels, input validation, ex
 
 `tests/live_ai.py` is a separate real-model integration test. It starts the production server, downloads the actual model in Chromium and requests a response on all three levels. The `ai-browser-check` GitHub Actions job runs it and publishes the selected strategy and verified text for review. A successful result must be labelled `source: model-selected`, with a valid strategy A/B/C/D, never `verified-fallback`. This proves real model inference and constrained guidance selection, not free-form generation.
 
+## Deployment layout
+
+`app.html` is the editable Vite HTML entry. `npm run build` produces `dist/` and refreshes the compiled `index.html`, `assets/`, `report.pdf` and `favicon.svg` at the repository root. The current GitHub Pages configuration publishes `main` from the root, so these compiled files are committed. This prevents Pages from exposing an unbuilt Vite entry. The `.nojekyll` file preserves static assets. The optional Actions deployment is manual to avoid two publishing jobs overwriting each other.
+
 ## Deploy
 
 ### GitHub Pages
 
 1. Publish the source to the selected `johndoe018/bekarys1` repository on `main`.
 2. In the repository, choose **Settings → Pages → Source → GitHub Actions**. Repository visibility should be public for the assignment.
-3. The included `.github/workflows/pages.yml` installs dependencies, runs the math tests, builds and deploys the website on pushes to `main` (or a manual workflow run).
+3. The optional `.github/workflows/pages.yml` builds and deploys the website when run manually. Automatic publishing currently uses the prebuilt repository root on `main`.
 4. Use the URL returned by the successful deployment job; verify it in a fresh browser and complete one task per level plus a real AI coach request before submitting.
 
 ### Netlify alternative

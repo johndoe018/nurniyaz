@@ -1,7 +1,5 @@
 name: Deploy Quadratic Studio
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
 permissions:
   contents: read
@@ -31,14 +29,6 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     steps:
-      - name: Select the built-app publishing workflow
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          current_type="$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq '.build_type')"
-          if [ "$current_type" != "workflow" ]; then
-            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow --silent
-          fi
       - name: Deploy the compiled website
         id: deployment
         uses: actions/deploy-pages@v4

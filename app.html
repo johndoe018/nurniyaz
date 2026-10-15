@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#153e35" />
+    <meta name="description" content="One mathematical idea, three ways to learn. Explore quadratic equations with guided hints, interactive graphs and an on-device AI coach. By Moldash Bekarys." />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <title>Quadratic Studio — Moldash Bekarys</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#workspace">Skip to learning workspace</a>
+    <header class="site-header shell">
+      <a class="brand" href="./" aria-label="Quadratic Studio home">
+        <span class="brand-mark">x<span>2</span></span>
+        <span>quadratic<span class="brand-second">studio</span></span>
+      </a>
+      <nav aria-label="Main navigation">
+        <a class="nav-active" href="#workspace">Workspace</a>
+        <button class="nav-link" id="about-button">How it works <span aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
+        <a class="nav-report" href="./report.pdf" target="_blank" rel="noopener">Project report <span aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+      </nav>
+      <div class="author"><span class="author-avatar" aria-hidden="true">MB</span><span>Moldash Bekarys<span class="author-label">LEARNER & CREATOR</span></span></div>
+    </header>
+
+    <main class="shell">
+      <section class="hero" aria-labelledby="hero-title">
+        <div>
+          <p class="eyebrow"><span class="small-star" aria-hidden="true">✳</span> A PERSONALIZED MATH LAB</p>
+          <h1 id="hero-title">One equation.<br><span>More ways to understand.</span></h1>
+        </div>
+        <div class="hero-aside">
+          <span class="topic-label">ALGEBRA / QUADRATIC EQUATIONS</span>
+          <p>A little guidance or a bigger challenge.<br> Find your starting point. Make it click.</p>
+          <div class="hero-note"><span class="dot"></span> Three levels. Your pace. Real understanding.</div>
+        </div>
+      </section>
+
+      <section id="workspace" class="workspace" aria-labelledby="workspace-title">
+        <div class="section-heading"><div><p class="eyebrow">01 / YOUR LEARNING PATH</p><h2 id="workspace-title">Start where you are.</h2></div><span class="section-note">Switch levels anytime. The core idea stays connected.</span></div>
+        <div class="level-tabs" role="tablist" aria-label="Difficulty level">
+          <button class="level-tab active" role="tab" id="tab-foundation" aria-controls="challenge-panel" aria-selected="true" data-level="foundation">
+            <span class="level-icon" aria-hidden="true">01</span><span class="level-copy"><span class="level-name">Foundation</span><span class="level-description">Small steps, strong foundations</span></span><span class="level-indicator" aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="level-tab" role="tab" id="tab-standard" aria-controls="challenge-panel" aria-selected="false" tabindex="-1" data-level="standard">
+            <span class="level-icon" aria-hidden="true">02</span><span class="level-copy"><span class="level-name">Standard</span><span class="level-description">Connect the dots yourself</span></span><span class="level-indicator" aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+          <button class="level-tab" role="tab" id="tab-advanced" aria-controls="challenge-panel" aria-selected="false" tabindex="-1" data-level="advanced">
+            <span class="level-icon" aria-hidden="true">03</span><span class="level-copy"><span class="level-name">Advanced</span><span class="level-description">Take the idea into the real world</span></span><span class="level-indicator" aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          </button>
+        </div>
+
+        <div class="learning-grid">
+          <div class="task-card" id="challenge-panel" role="tabpanel" aria-labelledby="tab-foundation">
+            <div class="card-topline"><span class="eyebrow">02 / THE CHALLENGE</span><button class="text-button" id="new-task"><span aria-hidden="true">⟳</span> New equation</button></div>
+            <div class="task-tags"><span id="difficulty-tag" class="pill">FOUNDATION</span><span id="task-focus">Factorising · about 4 min</span><span id="task-id" class="task-id">Q–001</span></div>
+            <h2 id="task-title">Find the two missing pieces.</h2>
+            <p id="task-description" class="task-description"></p>
+            <div class="equation-box"><span id="equation" class="math-equation" aria-label="Quadratic equation"></span><span id="equation-caption" class="equation-caption"></span></div>
+            <div id="scaffold" class="scaffold"></div>
+            <div class="answer-heading"><h3 id="answer-heading">What are the roots?</h3><span id="answer-note">Order doesn’t matter.</span></div>
+            <form id="answer-form" novalidate>
+              <div class="answer-inputs"><label><span id="answer-label-1">First root, x₁</span><input id="answer-1" name="answer1" autocomplete="off" spellcheck="false" placeholder="e.g. 2" aria-describedby="input-help"></label><label><span id="answer-label-2">Second root, x₂</span><input id="answer-2" name="answer2" autocomplete="off" spellcheck="false" placeholder="e.g. 3" aria-describedby="input-help"></label><button class="primary-button" type="submit">Check answer <span aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button></div>
+              <p id="input-help" class="input-help">Decimals, fractions and sqrt(…) are welcome.</p>
+              <div id="feedback" class="feedback" role="status" aria-live="polite" hidden></div>
+            </form>
+            <div class="support-row"><button class="support-button" id="hint-button"><span aria-hidden="true"><svg class="arrow-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><circle cx="10" cy="10" r="3.5" stroke="currentColor"/><path d="M10 1v2m0 14v2M1 10h2m14 0h2M3.6 3.6 5 5m10 10 1.4 1.4M3.6 16.4 5 15M15 5l1.4-1.4" stroke="currentColor" stroke-linecap="round"/></svg></span> Give me a hint <span id="hint-count">0 / 3</span></button><button class="text-button solution-button" id="solution-button">See the walkthrough <span aria-hidden="true">↓</span></button></div>
+            <ol id="hint-list" class="hint-list" aria-live="polite" hidden></ol>
+            <section id="solution" class="solution" aria-labelledby="solution-heading" hidden><h3 id="solution-heading">Let’s work it through.</h3><ol id="solution-steps"></ol><div id="solution-answer" class="solution-answer"></div></section>
+          </div>
+
+          <aside class="side-column" aria-label="Graph and AI support">
+            <section class="graph-card" aria-labelledby="graph-title"><div class="graph-heading"><h3 id="graph-title">A different perspective.</h3><span class="graph-tag">LIVE GRAPH</span></div><p id="graph-description">Roots are where the curve crosses the x-axis.</p><div id="graph" class="graph" role="img" aria-label="Interactive graph of the current quadratic"></div><div class="graph-controls"><label for="graph-slider">Explore the curve <span id="graph-readout"></span></label><input type="range" id="graph-slider" min="-2" max="7" step="0.05" value="0"></div></section>
+            <section class="coach-card" aria-labelledby="coach-title"><div class="coach-heading"><span class="coach-symbol" aria-hidden="true">✳</span><span class="coach-badge" id="ai-status">ON-DEVICE AI</span></div><h3 id="coach-title">A little help.<br>A bigger “aha”.</h3><p class="coach-intro">Your AI coach selects verified guidance for your question and level. Your work stays in your browser.</p><div class="coach-suggestions"><button data-question="Explain my next step in simple words.">My next step <span aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><button data-question="Why does this method work?">Why it works <span aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button></div><form id="coach-form"><label class="sr-only" for="coach-question">Ask your AI coach about this task</label><div class="coach-input-row"><input id="coach-question" maxlength="300" placeholder="Ask about this equation…" autocomplete="off"><button type="submit" aria-label="Send question to AI coach">↑</button></div></form><p class="coach-privacy" id="coach-state">Open-source language model · no API key</p><div id="model-progress" class="model-progress" hidden><progress max="100" value="0" aria-label="AI model download progress"></progress><button id="cancel-ai" type="button">Cancel</button></div><div id="coach-answer" class="coach-answer" role="status" aria-live="polite" hidden></div><p class="coach-footnote">AI chooses the guidance. Every displayed explanation comes from the verified task engine.</p></section>
+          </aside>
+        </div>
+        <div class="progress-strip"><span class="progress-icon" aria-hidden="true"><svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></span><div><strong>Understanding grows one step at a time.</strong><span id="progress-copy">Explore all three levels. There’s no rush.</span></div><div class="progress-count"><span id="progress-number">0</span><span>/ 3 levels practised</span></div><button class="text-button" id="reset-progress">Reset progress</button></div>
+      </section>
+      <footer><span>Made with curiosity, by <strong>Moldash Bekarys</strong></span><span>AI for Differentiated Learning · Topic 8</span><a href="./report.pdf" target="_blank" rel="noopener">Read the project report <svg class="arrow-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M4 12 12 4M4 4h8v8" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"/></svg></a></footer>
+    </main>
+    <dialog id="about-dialog" aria-labelledby="about-title"><div class="dialog-top"><span class="eyebrow">THE THINKING BEHIND THE STUDIO</span><button id="close-about" class="close-button" aria-label="Close how it works">×</button></div><h2 id="about-title">Same concept.<br>A path that fits.</h2><p>Every level explores one core idea: finding the values that make a quadratic equal zero. A shared seed connects the equations when you switch levels.</p><div class="about-level"><strong>01 / Foundation</strong><p>Factor a monic quadratic with integer roots. Get a direct, three-step scaffold and progressive hints.</p></div><div class="about-level"><strong>02 / Standard</strong><p>Handle a non-monic quadratic with irrational roots. Use the discriminant and quadratic formula.</p></div><div class="about-level"><strong>03 / Advanced</strong><p>Model a ball’s height. Interpret the physical root, find the vertex and calculate the maximum height.</p></div><p><strong>How the AI works.</strong> An open-source SmolLM2 language model runs in a background worker on your device. The first request downloads its model files. It chooses among verified next-step, concept, checking and connection cards using your question, level and equation. Its output is restricted to four valid choices; all displayed mathematics comes from the verified task engine.</p><p class="dialog-note">No account, API key or student data upload is required. Model files need an internet connection initially; the browser may cache them. On unsupported devices, verified hints and walkthroughs remain available. Progress is stored locally on this device.</p></dialog>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
