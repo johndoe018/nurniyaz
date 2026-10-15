@@ -55,7 +55,7 @@ story += [t,
     para('Feedback, validation and limitations', heading),
     para('Immediate checking accepts fractions, radicals and decimals within 0.01, and explains notation errors, duplicate roots and inadmissible negative time. Hints, complete solutions and an interactive graph support self-paced learning. Progress is stored locally. Eight test groups verify all 24 tasks, parsing and prompt context; browser checks exercise learning interactions and the honestly labelled model-unavailable fallback. Real inference and public publication remain unverified where network access is blocked. AI wording may be imperfect; the verified walkthrough remains authoritative.'),
     Spacer(1, 6),
-    para('<b>Development disclosure:</b> Prepared with AI assistance; mathematics verified independently of model output.<br/><b>References:</b> huggingface.co/docs/transformers.js · huggingface.co/onnx-community/SmolLM2-135M-Instruct · vite.dev/guide/static-deploy.html · GitHub Pages documentation.', small),
+    para('<b>Development disclosure:</b> Prepared with AI assistance; mathematics verified independently of model output.<br/><b>References:</b> huggingface.co/docs/transformers.js · huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct · vite.dev/guide/static-deploy.html · GitHub Pages documentation.', small),
 ]
 
 def footer(canvas, doc):

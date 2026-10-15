@@ -11,7 +11,7 @@ self.onmessage = async ({ data }) => {
   try {
     if (!generator) {
       self.postMessage({ id, type: 'status', text: 'Downloading the open-source model. First use can take a few minutes.' });
-      generator = await pipeline('text-generation', 'onnx-community/SmolLM2-135M-Instruct', {
+      generator = await pipeline('text-generation', 'HuggingFaceTB/SmolLM2-135M-Instruct', {
         device: 'wasm', dtype: 'q4',
         progress_callback: progress => {
           if (progress.status === 'progress') self.postMessage({ id, type: 'progress', value: progress.progress, file: progress.file });

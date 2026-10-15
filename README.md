@@ -48,7 +48,7 @@ Changing levels preserves the seed; **New equation** cycles eight seeds. The lev
 
 ## Actual AI integration
 
-`src/ai.worker.js` uses **Transformers.js 3.8.1** to run the open-source **onnx-community/SmolLM2-135M-Instruct** model with **q4 quantisation and ONNX WASM** in a background Web Worker. The model is loaded only on the first coach request. Model downloads can take several minutes; subsequent use may benefit from browser caching. Current desktop browsers work best; memory limits, private-browsing restrictions or blocked model hosts can prevent inference.
+`src/ai.worker.js` uses **Transformers.js 3.8.1** to run the open-source **HuggingFaceTB/SmolLM2-135M-Instruct** model with **q4 quantisation and ONNX WASM** in a background Web Worker. The model is loaded only on the first coach request. Model downloads can take several minutes; subsequent use may benefit from browser caching. Current desktop browsers work best; memory limits, private-browsing restrictions or blocked model hosts can prevent inference.
 
 The prompt is assembled in `src/math.js::aiPrompt`. It contains the current equation, level-specific teaching style, learner question, a verified hint and the last answer-check feedback. It includes final results only if the learner has opened the walkthrough. The model dynamically explains the selected task and method; it does **not** generate unchecked coefficients or grade answers. The deterministic engine transforms task parameters and supplies verified mathematical context to the model.
 
@@ -114,7 +114,7 @@ The deliverable was prepared with AI development assistance. Moldash Bekarys is 
 ## Technology references
 
 - [Transformers.js documentation](https://huggingface.co/docs/transformers.js)
-- [Open-source model and model card](https://huggingface.co/onnx-community/SmolLM2-135M-Instruct)
+- [Open-source model and model card](https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct)
 - [Vite deployment documentation](https://vite.dev/guide/static-deploy.html)
 - [GitHub Pages with Actions](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
 
