@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'test-results'
 OUT.mkdir(exist_ok=True)
 results = []
+diagnostics = []
 server = subprocess.Popen(['npm', 'run', 'preview', '--', '--port', '4180', '--strictPort'], cwd=ROOT,
                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
 try:
@@ -29,6 +30,8 @@ try:
         if os.environ.get('BROWSER_EXECUTABLE'): launch['executable_path'] = os.environ['BROWSER_EXECUTABLE']
         browser = p.chromium.launch(**launch)
         page = browser.new_page(viewport={'width': 1280, 'height': 1000})
+        page.on('console', lambda message: diagnostics.append(message.text[:500]) if message.type in ['error', 'warning'] else None)
+        page.on('requestfailed', lambda request: diagnostics.append(request.url.split('?')[0] + ': ' + str(request.failure)))
         page.goto('http://127.0.0.1:4180', wait_until='networkidle')
         for level in ['foundation', 'standard', 'advanced']:
             page.locator(f'#tab-{level}').click()
@@ -41,13 +44,17 @@ try:
             results.append({'level': level, 'equation': page.locator('#equation').inner_text(), 'status': status,
                             'source': source, 'text': text, 'seconds': round(time.monotonic() - started, 2)})
             page.screenshot(path=str(OUT / f'live-ai-{level}.png'), full_page=True)
-            assert status == 'AI RESPONSE' and source == 'model' and len(text.strip()) > 10, f'{level}: live model inference failed: {text}'
+            passed = status == 'AI RESPONSE' and source == 'model' and len(text.strip()) > 10
+            annotation = ('Live model inference passed: ' + text) if passed else ('Live model inference failed: ' + ' | '.join(diagnostics[-6:]))
+            annotation = annotation.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
+            print(f'::{"notice" if passed else "error"} title=AI browser {level}::{annotation}', flush=True)
+            assert passed, f'{level}: live model inference failed: {text}'
             print(f'PASS real browser model inference / {level}: {text}', flush=True)
         browser.close()
 finally:
     import signal
     os.killpg(server.pid, signal.SIGTERM)
-    (OUT / 'live-ai-results.json').write_text(json.dumps(results, indent=2))
+    (OUT / 'live-ai-results.json').write_text(json.dumps({'results': results, 'diagnostics': diagnostics}, indent=2))
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         summary = ['## Real on-device AI browser check',
                    'Runs the production website in Chromium and downloads the real open-source model. The entries below distinguish model output from verified fallback. Generated prose still needs mathematical review.']

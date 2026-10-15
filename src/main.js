@@ -188,7 +188,10 @@ function askCoach(question) {
           $('coach-state').textContent = 'Generated on your device · check math with the verified walkthrough';
           $('coach-answer').hidden = false; $('coach-answer').dataset.source = 'model'; $('coach-answer').textContent = data.text;
         }
-        if (data.type === 'error') showModelFailure(data.text);
+        if (data.type === 'error') {
+          console.warn('[Quadratic Studio model]', data.detail);
+          showModelFailure(data.text);
+        }
       };
       worker.onerror = () => { worker?.terminate(); worker = undefined; modelReady = false; showModelFailure('AI could not start in this browser. Try a recent browser or use the verified hints.'); };
     }

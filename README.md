@@ -4,6 +4,8 @@
 
 A responsive, interactive learning lab that transforms one quadratic-equations concept into Foundation, Standard and Advanced challenges. Includes 24 verified tasks, three hints per task, worked solutions, arithmetic-aware answer checking, an interactive graph and a real, on-device language-model integration.
 
+![Quadratic Studio desktop workspace](docs/preview-desktop.png)
+
 ## Run locally
 
 Use Node.js 22 LTS (see `.nvmrc`) or Node.js 24, and npm 10 or 11.
