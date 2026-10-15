@@ -85,6 +85,8 @@ BROWSER_EXECUTABLE=/path/to/chromium python3 tests/browser.py
 
 The checks exercise the real production page: three levels, input validation, exact-root submission, physical interpretation, hints, solutions, keyboard navigation, graph updates, local progress, dialog behaviour, report download, responsive layouts and an intentionally denied model-download fallback. Screenshots and results go to ignored `test-results/`. **These browser checks do not claim to test successful language-model inference.** See `SUBMISSION.md` for the current deployment/inference status.
 
+`tests/live_ai.py` is a separate real-model integration test. It starts the production server, downloads the actual model in Chromium and requests a response on all three levels. The `ai-browser-check` GitHub Actions job runs it and publishes the generated text in its job summary for review. A successful result must be labelled `source: model`, never `verified-fallback`. Generated prose is still subject to human mathematical review.
+
 ## Deploy
 
 ### GitHub Pages

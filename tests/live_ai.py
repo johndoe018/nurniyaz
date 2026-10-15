@@ -1,0 +1,57 @@
+"""Real model integration check. Runs in CI; downloads public model weights.
+
+This is distinct from browser.py's deliberately blocked-download fallback check.
+Generated explanations are recorded for human review, not treated as a math oracle.
+"""
+import html
+import json
+import os
+import subprocess
+import time
+import urllib.request
+from pathlib import Path
+from playwright.sync_api import sync_playwright, expect
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / 'test-results'
+OUT.mkdir(exist_ok=True)
+results = []
+server = subprocess.Popen(['npm', 'run', 'preview', '--', '--port', '4180', '--strictPort'], cwd=ROOT,
+                          stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+try:
+    for _ in range(80):
+        try:
+            if urllib.request.urlopen('http://127.0.0.1:4180', timeout=1).status == 200: break
+        except Exception: time.sleep(.25)
+    else: raise RuntimeError('Production server did not start')
+    with sync_playwright() as p:
+        launch = {'headless': True, 'args': ['--no-sandbox']}
+        if os.environ.get('BROWSER_EXECUTABLE'): launch['executable_path'] = os.environ['BROWSER_EXECUTABLE']
+        browser = p.chromium.launch(**launch)
+        page = browser.new_page(viewport={'width': 1280, 'height': 1000})
+        page.goto('http://127.0.0.1:4180', wait_until='networkidle')
+        for level in ['foundation', 'standard', 'advanced']:
+            page.locator(f'#tab-{level}').click()
+            started = time.monotonic()
+            page.locator('[data-question]').first.click()
+            page.wait_for_function("['AI RESPONSE','AI UNAVAILABLE'].includes(document.getElementById('ai-status').textContent)", timeout=200000)
+            status = page.locator('#ai-status').inner_text()
+            text = page.locator('#coach-answer').inner_text()
+            source = page.locator('#coach-answer').get_attribute('data-source')
+            results.append({'level': level, 'equation': page.locator('#equation').inner_text(), 'status': status,
+                            'source': source, 'text': text, 'seconds': round(time.monotonic() - started, 2)})
+            page.screenshot(path=str(OUT / f'live-ai-{level}.png'), full_page=True)
+            assert status == 'AI RESPONSE' and source == 'model' and len(text.strip()) > 10, f'{level}: live model inference failed: {text}'
+            print(f'PASS real browser model inference / {level}: {text}', flush=True)
+        browser.close()
+finally:
+    import signal
+    os.killpg(server.pid, signal.SIGTERM)
+    (OUT / 'live-ai-results.json').write_text(json.dumps(results, indent=2))
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        summary = ['## Real on-device AI browser check',
+                   'Runs the production website in Chromium and downloads the real open-source model. The entries below distinguish model output from verified fallback. Generated prose still needs mathematical review.']
+        for result in results:
+            summary.append(f"### {result['level'].title()} — {result['status']} ({result['seconds']} s)")
+            summary.append(f"<pre>{html.escape(result['equation'])}\nSource: {html.escape(result['source'] or 'none')}\n\n{html.escape(result['text'])}</pre>")
+        Path(os.environ['GITHUB_STEP_SUMMARY']).write_text('\n\n'.join(summary))

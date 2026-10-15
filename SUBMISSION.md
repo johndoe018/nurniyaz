@@ -27,8 +27,8 @@
 ## Outstanding external steps
 
 1. **Real AI inference:** The environment's network proxy denies access to Hugging Face. Allow the model host and its artifact hosts, then open the application and make a coach request on each level. Inspect whether explanations are appropriate and consistent with the verified walkthrough. Do not describe inference as tested until it succeeds.
-2. **Public source repository:** The selected target is `johndoe018/bekarys1`. Git reads work, but GitHub API access is blocked. Publication status must be checked after a successful authenticated write. The downloadable source is complete independently of hosting.
-3. **Live website:** A public deployment URL is not available yet. Enable GitHub Pages with GitHub Actions for the target repository, or deploy the built website package through Netlify. Verify the real public URL, three levels and a successful AI request in a fresh browser before submission.
+2. **Public source repository — completed:** Source was pushed to `main` at https://github.com/johndoe018/bekarys1 and the remote SHA was verified. GitHub's repository metadata confirms `isPrivate: false`. The GitHub Actions build also passed.
+3. **Live website:** The first deployment attempt failed because GitHub Pages is not enabled (deployment API returned 404). Choose **Settings → Pages → Source → GitHub Actions** at https://github.com/johndoe018/bekarys1/settings/pages, then re-run the deployment workflow. Alternatively deploy the built website package through Netlify. Verify the real public URL, three levels and a successful AI request in a fresh browser before submission.
 
 Required host additions have been saved to the environment configuration draft: `api.github.com`, `huggingface.co`, `cas-bridge.xethub.hf.co`, `cdn-lfs.hf.co` and `cdn-lfs.huggingface.co`. Saving a draft does not apply the settings or publish the environment. Review and save the changes in environment settings, then publish the environment to make the configuration reusable.
 
