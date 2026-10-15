@@ -1,6 +1,6 @@
 # Quadratic Studio: AI for Differentiated Learning
 
-**Moldash Bekarys · Topic 8 · Mathematics topic: Quadratic equations**
+**Muratbek Nurniyaz · Topic 8 · Mathematics topic: Quadratic equations**
 
 ## Objective
 

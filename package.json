@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "type": "module",
-  "description": "A differentiated quadratic-equations learning lab by Moldash Bekarys.",
+  "description": "A differentiated quadratic-equations learning lab by Muratbek Nurniyaz.",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
     "build": "vite build && node scripts/prepare-pages.mjs",

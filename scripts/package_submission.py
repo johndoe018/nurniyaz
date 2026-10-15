@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT.parent / 'output'
 OUT.mkdir(exist_ok=True)
-AUTHOR = 'Moldash Bekarys'
-NAME = 'Moldash_Bekarys_Quadratic_Studio'
+AUTHOR = 'Muratbek Nurniyaz'
+NAME = 'Muratbek_Nurniyaz_Quadratic_Studio'
 sha = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=ROOT, text=True).strip()
 if not (ROOT / 'dist/index.html').exists(): raise SystemExit('Run npm run build first.')
 source = subprocess.check_output(['git', 'archive', '--format=zip', 'HEAD'], cwd=ROOT)
@@ -32,7 +32,7 @@ with ThreadingHTTPServer(('127.0.0.1', args.port), handler) as server:
     try: server.serve_forever()
     except KeyboardInterrupt: pass
 '''
-readme = '''# Quadratic Studio — Moldash Bekarys
+readme = '''# Quadratic Studio — Muratbek Nurniyaz
 
 Topic 8: AI for Differentiated Learning / Quadratic equations
 

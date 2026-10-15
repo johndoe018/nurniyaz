@@ -13,8 +13,8 @@ FONT_DIR = Path('/usr/share/fonts/truetype/dejavu')
 pdfmetrics.registerFont(TTFont('DejaVu', str(FONT_DIR / 'DejaVuSans.ttf')))
 pdfmetrics.registerFont(TTFont('DejaVu-Bold', str(FONT_DIR / 'DejaVuSans-Bold.ttf')))
 pdfmetrics.registerFontFamily('DejaVu', normal='DejaVu', bold='DejaVu-Bold')
-GREEN = colors.HexColor('#153e35')
-MUTED = colors.HexColor('#5c6958')
+GREEN = colors.HexColor('#39284a')
+MUTED = colors.HexColor('#5c477a')
 body = ParagraphStyle('body', fontName='DejaVu', fontSize=8.65, leading=13.2, textColor=MUTED, spaceAfter=7)
 heading = ParagraphStyle('heading', parent=body, fontName='DejaVu-Bold', fontSize=9.1, leading=13, textColor=GREEN, spaceBefore=8, spaceAfter=5)
 small = ParagraphStyle('small', parent=body, fontSize=7.2, leading=10.4)
@@ -26,7 +26,7 @@ story = [
     para('TOPIC 8 / AI FOR DIFFERENTIATED LEARNING', ParagraphStyle('kicker', parent=small, fontName='DejaVu-Bold', textColor=GREEN, fontSize=7.3, tracking=1.2)),
     Spacer(1, 4),
     para('Quadratic Studio', ParagraphStyle('title', fontName='DejaVu-Bold', fontSize=25, leading=31, textColor=GREEN)),
-    para('<b>Moldash Bekarys</b> · Quadratic equations · Individual project', body),
+    para('<b>Muratbek Nurniyaz</b> · Quadratic equations · Individual project', body),
     para('<b>Live:</b> <link href="https://johndoe018.github.io/bekarys1/">johndoe018.github.io/bekarys1/</link> · <b>Source:</b> <link href="https://github.com/johndoe018/bekarys1">github.com/johndoe018/bekarys1</link>', small),
     Spacer(1, 5),
     para('One concept. Three starting points.', heading),
@@ -41,11 +41,11 @@ rows = [
 ]
 t = Table(rows, colWidths=[78, 194, 247], hAlign='LEFT')
 t.setStyle(TableStyle([
-    ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#eaf0df')),
-    ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#f6f8f1')),
+    ('BACKGROUND', (0,0), (-1,0), colors.HexColor('#e6def1')),
+    ('BACKGROUND', (0,1), (-1,-1), colors.HexColor('#f4f0f9')),
     ('VALIGN',(0,0),(-1,-1),'TOP'),('LEFTPADDING',(0,0),(-1,-1),9),('RIGHTPADDING',(0,0),(-1,-1),9),
     ('TOPPADDING',(0,0),(-1,-1),8),('BOTTOMPADDING',(0,0),(-1,-1),8),
-    ('LINEBELOW',(0,0),(-1,-1),.5,colors.HexColor('#dfe6d4')),
+    ('LINEBELOW',(0,0),(-1,-1),.5,colors.HexColor('#dbcfeb')),
 ]))
 story += [t,
     para('AI architecture', heading),
@@ -60,14 +60,14 @@ story += [t,
 ]
 
 def footer(canvas, doc):
-    canvas.setStrokeColor(colors.HexColor('#dfe6d4'))
+    canvas.setStrokeColor(colors.HexColor('#dbcfeb'))
     canvas.line(38, 30, A4[0] - 38, 30)
     canvas.setFont('DejaVu', 6.8)
     canvas.setFillColor(MUTED)
-    canvas.drawString(38, 18, 'MOLDASH BEKARYS / QUADRATIC STUDIO')
+    canvas.drawString(38, 18, 'MURATBEK NURNIYAZ / QUADRATIC STUDIO')
     canvas.drawRightString(A4[0] - 38, 18, f'{doc.page}')
 
 out = ROOT / 'public' / 'report.pdf'
 SimpleDocTemplate(str(out), pagesize=A4, rightMargin=38, leftMargin=38, topMargin=32, bottomMargin=40,
-                  title='Quadratic Studio — AI for Differentiated Learning', author='Moldash Bekarys').build(story, onFirstPage=footer, onLaterPages=footer)
+                  title='Quadratic Studio — AI for Differentiated Learning', author='Muratbek Nurniyaz').build(story, onFirstPage=footer, onLaterPages=footer)
 print(out)

@@ -1,6 +1,6 @@
 # Quadratic Studio
 
-**Moldash Bekarys · Topic 8: AI for Differentiated Learning**
+**Muratbek Nurniyaz · Topic 8: AI for Differentiated Learning**
 
 [Live website](https://johndoe018.github.io/bekarys1/) · [Public source](https://github.com/johndoe018/bekarys1) · [One-page report](public/report.pdf)
 
@@ -115,7 +115,7 @@ Import the public repository with build command `npm run build` and publish dire
 - `SUBMISSION.md`: deliverables, tested capabilities and outstanding publication requirements.
 - `src/`, `index.html`, `tests/`, `package.json`, `package-lock.json`: original project source and reproducible dependencies.
 
-The deliverable was prepared with AI development assistance. Moldash Bekarys is the project owner named by the requester; this does not imply unaided student authorship. Review the code, prompts and report and follow the course's disclosure rules when submitting.
+The deliverable was prepared with AI development assistance. Muratbek Nurniyaz is the project owner named by the requester; this does not imply unaided student authorship. Review the code, prompts and report and follow the course's disclosure rules when submitting.
 
 ## Technology references
 
