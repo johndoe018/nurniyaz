@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
-URL = os.environ.get('QUADRATIC_TEST_URL', 'http://127.0.0.1:4173')
+URL = os.environ.get('QUADRATIC_TEST_URL', 'http://127.0.0.1:4173').rstrip('/')
 OUT = Path(__file__).resolve().parents[1] / 'test-results'
 OUT.mkdir(exist_ok=True)
 checks = []

@@ -59,10 +59,10 @@ If it fails, the application labels the fallback as verified guidance, not AI-ge
 
 ## Source and hosting
 
+Live website: https://johndoe018.github.io/bekarys1/
 Public source: https://github.com/johndoe018/bekarys1
 See source/SUBMISSION.md for verified capabilities and the current real-AI/deployment status.
-The GitHub Pages build is prepared. A live website requires Pages enabled in the repository:
-Settings -> Pages -> Source -> GitHub Actions, then re-run the workflow.
+The website is deployed with GitHub Pages; the source includes its tested deployment workflow.
 The contents of website/ can also be deployed to a static host such as Netlify.
 
 The report and source disclose AI development assistance. Review the work before submitting it.

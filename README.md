@@ -2,6 +2,8 @@
 
 **Moldash Bekarys · Topic 8: AI for Differentiated Learning**
 
+[Live website](https://johndoe018.github.io/bekarys1/) · [Public source](https://github.com/johndoe018/bekarys1) · [One-page report](public/report.pdf)
+
 A responsive, interactive learning lab that transforms one quadratic-equations concept into Foundation, Standard and Advanced challenges. Includes 24 verified tasks, three hints per task, worked solutions, arithmetic-aware answer checking, an interactive graph and a real, on-device language-model integration.
 
 ![Quadratic Studio desktop workspace](docs/preview-desktop.png)

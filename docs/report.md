@@ -24,6 +24,9 @@ Foundation prioritises direct scaffolding and a small next step. Standard suppor
 
 ## Feedback and verification
 
-Instant deterministic feedback accepts numbers, fractions, square-root expressions and two-decimal approximations within `0.01`. It distinguishes duplicate roots, notation errors and inadmissible negative time. Progressive hints, worked solutions and a graph slider support self-paced learning. Progress stays in local browser storage. Ten automated test groups validate all 24 tasks, parsing, prompt context and output constraints; functional browser checks cover the learning interactions and model-unavailable fallback. Real inference and public publication remain unverified where network access is blocked. Initial unrestricted model responses were rejected after browser tests found incorrect mathematics. Constrained selection prevents invented displayed mathematics; a model may still choose a less relevant card.
+Instant deterministic feedback accepts numbers, fractions, square-root expressions and two-decimal approximations within `0.01`. It distinguishes duplicate roots, notation errors and inadmissible negative time. Progressive hints, worked solutions and a graph slider support self-paced learning. Progress stays in local browser storage. Ten automated test groups validate all 24 tasks, parsing, prompt context and output constraints; functional browser checks cover the learning interactions and model-unavailable fallback. Real browser model selection passed on all three levels in GitHub Actions. The source is public and the GitHub Pages deployment succeeded. Initial unrestricted model responses were rejected after browser tests found incorrect mathematics. Constrained selection prevents invented displayed mathematics; a model may still choose a less relevant card.
 
 **Development disclosure:** Prepared with AI assistance; mathematics checked independently of model output. Sources: Transformers.js documentation; SmolLM2 model card; Vite and GitHub Pages documentation.
+
+**Live website:** https://johndoe018.github.io/bekarys1/
+**Public source:** https://github.com/johndoe018/bekarys1

@@ -24,15 +24,16 @@
 - Report was rendered and visually inspected, with one page and PDF author metadata set to Moldash Bekarys.
 - A deliberately denied model download verified the honest **AI unavailable** state and clearly labelled non-AI fallback. This is not evidence of successful model inference.
 
-## Outstanding external steps
+## Publication and real AI
 
-1. **Real AI inference:** The environment's network proxy denies access to Hugging Face. Allow the model host and its artifact hosts, then open the application and make a coach request on each level. Inspect whether explanations are appropriate and consistent with the verified walkthrough. Do not describe inference as tested until it succeeds.
-2. **Public source repository — completed:** Source was pushed to `main` at https://github.com/johndoe018/bekarys1 and the remote SHA was verified. GitHub's repository metadata confirms `isPrivate: false`. The GitHub Actions build also passed.
-3. **Live website:** The first deployment attempt failed because GitHub Pages is not enabled (deployment API returned 404). Choose **Settings → Pages → Source → GitHub Actions** at https://github.com/johndoe018/bekarys1/settings/pages, then re-run the deployment workflow. Alternatively deploy the built website package through Netlify. Verify the real public URL, three levels and a successful AI request in a fresh browser before submission.
+- **Live website:** https://johndoe018.github.io/bekarys1/
+- **Public source:** https://github.com/johndoe018/bekarys1 (`main`; confirmed public in GitHub metadata).
+- **Successful test/build/deploy run:** https://github.com/johndoe018/bekarys1/actions/runs/38798792099
+- **Real browser AI:** The constrained SmolLM2 model loaded and selected valid verified next-step guidance on Foundation, Standard and Advanced in Chromium. All three returned `source: model-selected`, with strategy A, using the actual model weights and ONNX WASM. This demonstrates real inference and correct guidance selection for the tested requests, not free-form generation or general classification accuracy.
+- **Mathematical safety:** Initial free-form responses were rejected after actual browser tests found errors. The final implementation masks every output token except A/B/C/D and maps the model-selected label to a complete verified explanation. The model can select a less relevant card, but cannot supply invented displayed mathematics.
+- **Deployment:** GitHub Pages is now enabled, and deployment succeeded. Earlier 404 failures were resolved. The deployment workflow additionally runs the 13 functional browser checks and three real-model requests against the actual public URL after deployment; inspect its latest `verify-live-site` result for that additional evidence.
 
-Required host additions have been saved to the environment configuration draft: `api.github.com`, `huggingface.co`, `cas-bridge.xethub.hf.co`, `cdn-lfs.hf.co` and `cdn-lfs.huggingface.co`. Saving a draft does not apply the settings or publish the environment. Review and save the changes in environment settings, then publish the environment to make the configuration reusable.
-
-No secret value is needed for the application. The AI model runs on the learner's device. If repository publication needs further permissions, use the platform's GitHub connection or repository settings; never put access tokens in the app or submission.
+The current cloud machine's proxy still restricts direct Hugging Face and GitHub Pages HTTP access. Real model inference and deployment are independently verified on GitHub Actions runners. Saved cloud install/start instructions and domain requirements let future tasks reproduce setup; saved drafts still need review/save/publish in environment settings to activate configuration changes. No app API key is required.
 
 ## Suggested demonstration
 
@@ -40,6 +41,6 @@ No secret value is needed for the application. The AI model runs on the learner'
 2. Standard: enter `(5-sqrt(7))/2` and `(5+sqrt(7))/2`.
 3. Advanced: enter `6` for landing time and `61.25` for maximum height; explain why `−1` second is rejected.
 4. Move the graph slider, switch levels using arrow keys, generate another equation, and reload to demonstrate saved progress.
-5. Make a real AI request and explain how its prompt changes by level. Distinguish model-generated language from deterministic mathematical checking.
+5. Make a real AI request and explain how its prompt and guidance cards change by level. Distinguish the model’s guidance selection from deterministic mathematics and answer checking.
 
 **Development disclosure:** Prepared with AI development assistance; review and adapt the work in line with the course's authorship and disclosure policy.

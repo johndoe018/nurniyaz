@@ -17,12 +17,15 @@ OUT = ROOT / 'test-results'
 OUT.mkdir(exist_ok=True)
 results = []
 diagnostics = []
-server = subprocess.Popen(['npm', 'run', 'preview', '--', '--port', '4180', '--strictPort'], cwd=ROOT,
+external_url = os.environ.get('QUADRATIC_TEST_URL')
+server = None if external_url else subprocess.Popen(['npm', 'run', 'preview', '--', '--port', '4180', '--strictPort'], cwd=ROOT,
                           stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, start_new_session=True)
+url = external_url or 'http://127.0.0.1:4180'
 try:
     for _ in range(80):
         try:
-            if urllib.request.urlopen('http://127.0.0.1:4180', timeout=1).status == 200: break
+            response = urllib.request.urlopen(url, timeout=3)
+            if response.status == 200 and b'Quadratic Studio' in response.read(): break
         except Exception: time.sleep(.25)
     else: raise RuntimeError('Production server did not start')
     with sync_playwright() as p:
@@ -32,7 +35,7 @@ try:
         page = browser.new_page(viewport={'width': 1280, 'height': 1000})
         page.on('console', lambda message: diagnostics.append(message.text[:500]) if message.type in ['error', 'warning'] else None)
         page.on('requestfailed', lambda request: diagnostics.append(request.url.split('?')[0] + ': ' + str(request.failure)))
-        page.goto('http://127.0.0.1:4180', wait_until='networkidle')
+        page.goto(url, wait_until='networkidle')
         for level in ['foundation', 'standard', 'advanced']:
             page.locator(f'#tab-{level}').click()
             started = time.monotonic()
@@ -54,7 +57,7 @@ try:
         browser.close()
 finally:
     import signal
-    os.killpg(server.pid, signal.SIGTERM)
+    if server: os.killpg(server.pid, signal.SIGTERM)
     (OUT / 'live-ai-results.json').write_text(json.dumps({'results': results, 'diagnostics': diagnostics}, indent=2))
     if os.environ.get('GITHUB_STEP_SUMMARY'):
         summary = ['## Real on-device AI browser check',
