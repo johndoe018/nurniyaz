@@ -27,7 +27,7 @@ story = [
     Spacer(1, 4),
     para('Quadratic Studio', ParagraphStyle('title', fontName='DejaVu-Bold', fontSize=25, leading=31, textColor=GREEN)),
     para('<b>Muratbek Nurniyaz</b> · Quadratic equations · Individual project', body),
-    para('<b>Live:</b> <link href="https://johndoe018.github.io/bekarys1/">johndoe018.github.io/bekarys1/</link> · <b>Source:</b> <link href="https://github.com/johndoe018/bekarys1">github.com/johndoe018/bekarys1</link>', small),
+    para('<b>Live:</b> <link href="https://johndoe018.github.io/nurniyaz/">johndoe018.github.io/nurniyaz/</link> · <b>Source:</b> <link href="https://github.com/johndoe018/nurniyaz">github.com/johndoe018/nurniyaz</link>', small),
     Spacer(1, 5),
     para('One concept. Three starting points.', heading),
     para('A responsive learning lab develops one core task: finding and interpreting the zeros of a quadratic. A shared seed connects three differentiated versions; eight seeds provide 24 tasks. Learners choose their level, receive progressive guidance and check their understanding.'),

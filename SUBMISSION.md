@@ -26,9 +26,9 @@
 
 ## Publication and real AI
 
-- **Live website:** https://johndoe018.github.io/bekarys1/
-- **Public source:** https://github.com/johndoe018/bekarys1 (`main`; confirmed public in GitHub metadata).
-- **Successful test/build/deploy run:** https://github.com/johndoe018/bekarys1/actions/runs/38798792099
+- **Live website:** https://johndoe018.github.io/nurniyaz/
+- **Public source:** https://github.com/johndoe018/nurniyaz (`main`; confirmed public in GitHub metadata).
+- **Successful test/build/deploy run:** https://github.com/johndoe018/nurniyaz/actions/runs/38798792099
 - **Real browser AI:** The constrained SmolLM2 model loaded and selected valid verified next-step guidance on Foundation, Standard and Advanced in Chromium. All three returned `source: model-selected`, with strategy A, using the actual model weights and ONNX WASM. This demonstrates real inference and correct guidance selection for the tested requests, not free-form generation or general classification accuracy.
 - **Mathematical safety:** Initial free-form responses were rejected after actual browser tests found errors. The final implementation masks every output token except A/B/C/D and maps the model-selected label to a complete verified explanation. The model can select a less relevant card, but cannot supply invented displayed mathematics.
 - **Deployment:** GitHub Pages is now enabled, and deployment succeeded. Earlier 404 failures were resolved. The deployment workflow additionally runs the 13 functional browser checks and three real-model requests against the actual public URL after deployment; inspect its latest `verify-live-site` result for that additional evidence.

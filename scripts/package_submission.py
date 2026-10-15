@@ -59,8 +59,8 @@ If it fails, the application labels the fallback as verified guidance, not AI-ge
 
 ## Source and hosting
 
-Live website: https://johndoe018.github.io/bekarys1/
-Public source: https://github.com/johndoe018/bekarys1
+Live website: https://johndoe018.github.io/nurniyaz/
+Public source: https://github.com/johndoe018/nurniyaz
 See source/SUBMISSION.md for verified capabilities and the current real-AI/deployment status.
 The website is deployed with GitHub Pages; the source includes its tested deployment workflow.
 The contents of website/ can also be deployed to a static host such as Netlify.

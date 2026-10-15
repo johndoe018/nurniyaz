@@ -2,7 +2,7 @@
 
 **Muratbek Nurniyaz · Topic 8: AI for Differentiated Learning**
 
-[Live website](https://johndoe018.github.io/bekarys1/) · [Public source](https://github.com/johndoe018/bekarys1) · [One-page report](public/report.pdf)
+[Live website](https://johndoe018.github.io/nurniyaz/) · [Public source](https://github.com/johndoe018/nurniyaz) · [One-page report](public/report.pdf)
 
 A responsive, interactive learning lab that transforms one quadratic-equations concept into Foundation, Standard and Advanced challenges. Includes 24 verified tasks, three hints per task, worked solutions, arithmetic-aware answer checking, an interactive graph and a real, on-device language-model integration.
 
@@ -99,7 +99,7 @@ The checks exercise the real production page: three levels, input validation, ex
 
 ### GitHub Pages
 
-1. Publish the source to the selected `johndoe018/bekarys1` repository on `main`.
+1. Publish the source to the selected `johndoe018/nurniyaz` repository on `main`.
 2. In the repository, choose **Settings → Pages → Source → GitHub Actions**. Repository visibility should be public for the assignment.
 3. The optional `.github/workflows/pages.yml` builds and deploys the website when run manually. Automatic publishing currently uses the prebuilt repository root on `main`.
 4. Use the URL returned by the successful deployment job; verify it in a fresh browser and complete one task per level plus a real AI coach request before submitting.
