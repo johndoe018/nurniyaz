@@ -2,7 +2,7 @@
 
 **Muratbek Nurniyaz · Topic 8: AI for Differentiated Learning**
 
-[Live website](https://johndoe018.github.io/nurniyaz/) · [Public source](https://github.com/johndoe018/nurniyaz) · [One-page report](public/report.pdf)
+[Live website](https://johndoe018.github.io/nurniyaz/) · [Public source](https://github.com/johndoe018/nurniyaz) · [One-page report](public/report-nurniyaz.pdf)
 
 A responsive, interactive learning lab that transforms one quadratic-equations concept into Foundation, Standard and Advanced challenges. Includes 24 verified tasks, three hints per task, worked solutions, arithmetic-aware answer checking, an interactive graph and a real, on-device language-model integration.
 

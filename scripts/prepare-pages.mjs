@@ -17,7 +17,7 @@ for (const name of previous) {
   }
 }
 cpSync(at('dist/assets'), at('assets'), { recursive: true });
-for (const name of ['index.html', 'report.pdf', 'favicon.svg']) copyFileSync(at(`dist/${name}`), at(name));
+for (const name of ['index.html', 'report.pdf', 'report-nurniyaz.pdf', 'favicon.svg']) copyFileSync(at(`dist/${name}`), at(name));
 writeFileSync(manifest, JSON.stringify(current, null, 2) + '\n');
 writeFileSync(at('.nojekyll'), '');
 console.log('Compiled website prepared in dist/ and repository root for GitHub Pages.');
