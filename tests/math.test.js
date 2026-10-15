@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { LEVELS, SEEDS, makeTask, solveQuadratic, parseAnswer, checkAnswers, aiPrompt } from '../src/math.js';
+import { LEVELS, SEEDS, makeTask, solveQuadratic, parseAnswer, checkAnswers, aiPrompt, coachOptions } from '../src/math.js';
+import { maskChoiceLogits } from '../src/ai-policy.js';
 
 test('all 24 differentiated tasks have correct roots and canonical answers', () => {
   for (let i = 0; i < SEEDS.length; i++) for (const level of LEVELS) {
@@ -72,10 +73,31 @@ test('prompts adapt to all levels and reveal final results only with an open wal
     const task = makeTask(level);
     const closed = aiPrompt(task, 'Help me', { hintsUsed: 0 });
     const open = aiPrompt(task, 'Help me', { solutionOpen: true });
-    assert.ok(closed[0].content.includes('hint rather than the final answer'));
+    assert.ok(closed[0].content.includes('Do not generate mathematics or prose'));
     assert.ok(closed[1].content.includes(`LEVEL: ${level}`));
     assert.ok(closed[1].content.includes(task.equation));
     assert.ok(!closed[1].content.includes('VERIFIED RESULT:'));
     assert.ok(open[1].content.includes(`VERIFIED RESULT: ${task.answerText}`));
   }
+});
+
+test('AI can select only complete, verified, level-specific guidance cards', () => {
+  for (let i = 0; i < SEEDS.length; i++) for (const level of LEVELS) {
+    const task = makeTask(level, i), closed = coachOptions(task), open = coachOptions(task, { solutionOpen: true });
+    assert.deepEqual(Object.keys(closed), ['A','B','C','D']);
+    assert.equal(closed.A.text, task.hints[0]);
+    assert.equal(coachOptions(task, { hintsUsed: 2 }).A.text, task.hints[2]);
+    assert.ok(!closed.D.text.includes(task.answerText));
+    assert.ok(open.D.text.includes(task.answerText));
+    assert.ok(Object.values(closed).every(x => x.title.length > 5 && x.text.length > 30));
+  }
+});
+
+test('the AI output mask preserves model rankings and rejects all other tokens', () => {
+  const scores = new Float32Array([100, 3, -2, 8, 90, 4]);
+  maskChoiceLogits(scores, [1,2,3,5]);
+  assert.deepEqual([...scores], [-Infinity, 3, -2, 8, -Infinity, 4]);
+  assert.equal([...scores].indexOf(Math.max(...scores)), 3);
+  assert.throws(() => maskChoiceLogits(scores, [100]));
+  assert.throws(() => maskChoiceLogits(scores, []));
 });

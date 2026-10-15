@@ -41,10 +41,11 @@ try:
             status = page.locator('#ai-status').inner_text()
             text = page.locator('#coach-answer').inner_text()
             source = page.locator('#coach-answer').get_attribute('data-source')
+            strategy = page.locator('#coach-answer').get_attribute('data-strategy')
             results.append({'level': level, 'equation': page.locator('#equation').inner_text(), 'status': status,
-                            'source': source, 'text': text, 'seconds': round(time.monotonic() - started, 2)})
+                            'source': source, 'strategy': strategy, 'text': text, 'seconds': round(time.monotonic() - started, 2)})
             page.screenshot(path=str(OUT / f'live-ai-{level}.png'), full_page=True)
-            passed = status == 'AI RESPONSE' and source == 'model' and len(text.strip()) > 10
+            passed = status == 'AI RESPONSE' and source == 'model-selected' and strategy in ['A','B','C','D'] and len(text.strip()) > 10
             annotation = ('Live model inference passed: ' + text) if passed else ('Live model inference failed: ' + ' | '.join(diagnostics[-6:]))
             annotation = annotation.replace('%', '%25').replace('\r', '%0D').replace('\n', '%0A')
             print(f'::{"notice" if passed else "error"} title=AI browser {level}::{annotation}', flush=True)

@@ -1,7 +1,7 @@
 import '@fontsource-variable/dm-sans';
 import '@fontsource-variable/manrope';
 import './style.css';
-import { LEVELS, SEEDS, makeTask, checkAnswers, aiPrompt, format } from './math.js';
+import { LEVELS, SEEDS, makeTask, checkAnswers, aiPrompt, coachOptions, format } from './math.js';
 
 const $ = id => document.getElementById(id);
 const storageKey = 'quadratic-studio-v1';
@@ -13,6 +13,7 @@ const solvedLevels = new Set(Array.isArray(saved.solvedLevels) ? saved.solvedLev
 const taskStates = new Map();
 let task;
 let worker, busy = false, modelReady = false, aiId = 0, aiTimeout;
+let pendingAIChoices;
 const stateFor = key => {
   if (!taskStates.has(key)) taskStates.set(key, { hintsUsed: 0, solutionOpen: false, answers: ['', ''], correct: false, feedback: null });
   return taskStates.get(key);
@@ -169,7 +170,7 @@ function askCoach(question) {
   const id = ++aiId, key = task.key, state = stateFor(key);
   $('coach-answer').hidden = true;
   $('ai-status').textContent = 'LOADING AI';
-  $('coach-state').textContent = 'Preparing the model on your device. First use downloads model files; this may take a few minutes.';
+  $('coach-state').textContent = 'Preparing the guidance model on your device. First use downloads model files; this may take a few minutes.';
   $('model-progress').querySelector('progress').removeAttribute('value');
   setBusy(true);
   try {
@@ -184,9 +185,12 @@ function askCoach(question) {
           $('coach-state').textContent = `Downloading ${data.file.split('/').at(-1)} · ${Math.round(data.value)}% (this file)`;
         }
         if (data.type === 'answer') {
+          const selected = pendingAIChoices?.[data.choice];
+          if (!selected) { showModelFailure('The model did not select a valid verified guidance card.'); return; }
           setBusy(false); $('ai-status').textContent = 'AI RESPONSE';
-          $('coach-state').textContent = 'Generated on your device · check math with the verified walkthrough';
-          $('coach-answer').hidden = false; $('coach-answer').dataset.source = 'model'; $('coach-answer').textContent = data.text;
+          $('coach-state').textContent = 'AI-selected on your device · mathematically verified guidance';
+          $('coach-answer').hidden = false; $('coach-answer').dataset.source = 'model-selected'; $('coach-answer').dataset.strategy = data.choice;
+          $('coach-answer').textContent = `${selected.title}\n${selected.text}`;
         }
         if (data.type === 'error') {
           console.warn('[Quadratic Studio model]', data.detail);
@@ -195,7 +199,9 @@ function askCoach(question) {
       };
       worker.onerror = () => { worker?.terminate(); worker = undefined; modelReady = false; showModelFailure('AI could not start in this browser. Try a recent browser or use the verified hints.'); };
     }
-    worker.postMessage({ id, messages: aiPrompt(task, question, { hintsUsed: state.hintsUsed, solutionOpen: state.solutionOpen, lastFeedback: state.feedback?.message }) });
+    const context = { hintsUsed: state.hintsUsed, solutionOpen: state.solutionOpen, lastFeedback: state.feedback?.message };
+    pendingAIChoices = coachOptions(task, context);
+    worker.postMessage({ id, messages: aiPrompt(task, question, context) });
     aiTimeout = setTimeout(() => { cancelAI(); showModelFailure('The model took too long to respond. You can retry or continue with verified hints.'); }, 180000);
   } catch { showModelFailure('This browser could not start on-device AI. Verified hints remain available.'); }
 }

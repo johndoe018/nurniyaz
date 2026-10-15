@@ -50,20 +50,20 @@ Changing levels preserves the seed; **New equation** cycles eight seeds. The lev
 
 `src/ai.worker.js` uses **Transformers.js 3.8.1** to run the open-source **HuggingFaceTB/SmolLM2-135M-Instruct** model with **q4 quantisation and ONNX WASM** in a background Web Worker. The model is loaded only on the first coach request. Model downloads can take several minutes; subsequent use may benefit from browser caching. Current desktop browsers work best; memory limits, private-browsing restrictions or blocked model hosts can prevent inference.
 
-The prompt is assembled in `src/math.js::aiPrompt`. It contains the current equation, level-specific teaching style, learner question, a verified hint and the last answer-check feedback. It includes final results only if the learner has opened the walkthrough. The model dynamically explains the selected task and method; it does **not** generate unchecked coefficients or grade answers. The deterministic engine transforms task parameters and supplies verified mathematical context to the model.
+The prompt is assembled in `src/math.js::aiPrompt`. It contains the current equation, learner level, question and four verified guidance cards: a next step, why the method works, checking an answer, and a deeper connection. Last-check feedback and the number of hints used personalise the cards. Final results appear only if the walkthrough is open. The model dynamically selects the most useful card; the deterministic engine transforms task parameters, provides all displayed mathematics and checks answers. This is constrained AI-assisted guidance, not free-form mathematical generation.
 
 Example system prompt, abridged:
 
-> You are a patient mathematics coach in Quadratic Studio. [Level-specific style.] Use at most 70 words. Adapt the supplied VERIFIED GUIDANCE to the learner question. Never invent coefficients, computations, answers or extra tasks. The walkthrough is closed: give a hint rather than the final answer.
+> Select the most useful VERIFIED guidance card for the learner. [Level-specific style.] Output exactly one letter: A, B, C or D. A = next step; B = why the method works; C = checking an answer; D = a deeper connection. Do not generate mathematics or prose.
 
-Foundation asks for simple vocabulary and one small next step; Standard asks for concise curriculum vocabulary and one useful question; Advanced asks for units, physical-domain interpretation and multi-step reasoning. See [the complete prompt source](src/math.js) for the exact implementation.
+Foundation prioritises direct scaffolding and a small next step; Standard supports independent reasoning about coefficients, the discriminant and formula; Advanced supports units, physical-domain interpretation and multi-step reasoning. A custom logits processor preserves the language model’s relative scores for the four label tokens and masks every other token. It generates exactly one label. The displayed explanation is the corresponding verified card, not unrestricted model prose. See [the complete prompt source](src/math.js) for the exact implementation.
 
 ### Privacy, keys and limitations
 
 - No external AI API is called and no API key is embedded in the client. The permitted open-source-model route replaces an API backend/key configuration.
 - Questions and answers remain on the device; model files are downloaded from Hugging Face. The host receives ordinary download requests, not the learner's prompt. The website has no analytics or student-upload endpoint.
 - Only level, seed and completed-level progress are stored in localStorage. Answer drafts remain in memory. **Reset progress** clears completion progress.
-- A language model can produce an imperfect explanation. Verified hints, deterministic checking and the complete walkthrough remain the mathematical authority.
+- A language model can choose a less relevant card, but it cannot invent displayed mathematical claims: decoding permits only A/B/C/D, and the app displays only the corresponding verified card. Card titles make the selected strategy visible; all four strategies remain mathematically valid for the current task. Initial free-form model responses were rejected after they produced incorrect mathematics in a real browser test.
 - If model loading fails, the app clearly says **AI unavailable** and labels its fallback **Verified guidance (not AI-generated)**. A fallback is never presented as successful inference. AI requests can be cancelled; changing tasks cancels an in-flight request to prevent stale replies.
 - Initial model access needs `huggingface.co` and its model-artifact/CDN hosts. The application does not need a public backend or server-held credentials.
 
@@ -73,7 +73,7 @@ Foundation asks for simple vocabulary and one small next step; Standard asks for
 npm test
 ```
 
-The eight Node test groups cover all 24 tasks: root substitution, Vieta's relations, exact radicals, rounded values, negative-time rejection, the vertex maximum, swapped answers, incorrect inputs, safe parsing and differentiated prompt context. A small recursive-descent parser supports fractions and `sqrt(…)`; it never evaluates JavaScript. Answers are accepted within an absolute tolerance of `0.01`.
+The ten Node test groups cover all 24 tasks: root substitution, Vieta's relations, exact radicals, rounded values, negative-time rejection, the vertex maximum, swapped answers, incorrect inputs, safe parsing differentiated prompt context, complete guidance cards and output-mask integrity. A small recursive-descent parser supports fractions and `sqrt(…)`; it never evaluates JavaScript. Answers are accepted within an absolute tolerance of `0.01`.
 
 The optional functional browser checks use Python Playwright and an installed Chromium:
 
@@ -87,7 +87,7 @@ BROWSER_EXECUTABLE=/path/to/chromium python3 tests/browser.py
 
 The checks exercise the real production page: three levels, input validation, exact-root submission, physical interpretation, hints, solutions, keyboard navigation, graph updates, local progress, dialog behaviour, report download, responsive layouts and an intentionally denied model-download fallback. Screenshots and results go to ignored `test-results/`. **These browser checks do not claim to test successful language-model inference.** See `SUBMISSION.md` for the current deployment/inference status.
 
-`tests/live_ai.py` is a separate real-model integration test. It starts the production server, downloads the actual model in Chromium and requests a response on all three levels. The `ai-browser-check` GitHub Actions job runs it and publishes the generated text in its job summary for review. A successful result must be labelled `source: model`, never `verified-fallback`. Generated prose is still subject to human mathematical review.
+`tests/live_ai.py` is a separate real-model integration test. It starts the production server, downloads the actual model in Chromium and requests a response on all three levels. The `ai-browser-check` GitHub Actions job runs it and publishes the selected strategy and verified text for review. A successful result must be labelled `source: model-selected`, with a valid strategy A/B/C/D, never `verified-fallback`. This proves real model inference and constrained guidance selection, not free-form generation.
 
 ## Deploy
 

@@ -18,7 +18,7 @@
 
 ## Validation completed in the current environment
 
-- **8 / 8** automated Node test groups passed. All 24 differentiated tasks have roots verified by substitution; tests also cover radicals, fractions, rounding, physical-domain constraints, vertices, unsafe inputs and prompt context.
+- **10 / 10** automated Node test groups passed. All 24 differentiated tasks have roots verified by substitution; tests also cover radicals, fractions, rounding, physical-domain constraints, vertices, unsafe inputs and prompt context.
 - **13 / 13** functional browser checks passed against the production build in Chromium. These include all levels, checking feedback, progressive hints, walkthroughs, keyboard controls, graph interaction, persistence, reset, report download and responsive widths of 375, 768, 1024 and 1440 pixels.
 - Production build succeeded. No uncaught browser errors or horizontal overflow were found in the tested interactions and widths.
 - Report was rendered and visually inspected, with one page and PDF author metadata set to Moldash Bekarys.
