@@ -1,6 +1,6 @@
 # Quadratic Studio: AI for Differentiated Learning
 
-**Muratbek Nurniyaz · Topic 8 · Mathematics topic: Quadratic equations**
+**Mavlyan Abubakir · Topic 8 · Mathematics topic: Quadratic equations**
 
 ## Objective
 
@@ -28,5 +28,5 @@ Instant deterministic feedback accepts numbers, fractions, square-root expressio
 
 **Development disclosure:** Prepared with AI assistance; mathematics checked independently of model output. Sources: Transformers.js documentation; SmolLM2 model card; Vite and GitHub Pages documentation.
 
-**Live website:** https://johndoe018.github.io/nurniyaz/
-**Public source:** https://github.com/johndoe018/nurniyaz
+**Live website:** https://johndoe018.github.io/abubakir/
+**Public source:** https://github.com/johndoe018/abubakir
