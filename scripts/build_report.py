@@ -26,8 +26,8 @@ story = [
     para('TOPIC 8 / AI FOR DIFFERENTIATED LEARNING', ParagraphStyle('kicker', parent=small, fontName='DejaVu-Bold', textColor=GREEN, fontSize=7.3, tracking=1.2)),
     Spacer(1, 4),
     para('Quadratic Studio', ParagraphStyle('title', fontName='DejaVu-Bold', fontSize=25, leading=31, textColor=GREEN)),
-    para('<b>Muratbek Nurniyaz</b> · Quadratic equations · Individual project', body),
-    para('<b>Live:</b> <link href="https://johndoe018.github.io/nurniyaz/">https://johndoe018.github.io/nurniyaz/</link> · <b>Source:</b> <link href="https://github.com/johndoe018/nurniyaz">github.com/johndoe018/nurniyaz</link>', small),
+    para('<b>Mavlyan Abubakir</b> · Quadratic equations · Individual project', body),
+    para('<b>Live:</b> <link href="https://johndoe018.github.io/abubakir/">https://johndoe018.github.io/abubakir/</link> · <b>Source:</b> <link href="https://github.com/johndoe018/abubakir">github.com/johndoe018/nurniyaz</link>', small),
     Spacer(1, 5),
     para('One concept. Three starting points.', heading),
     para('A responsive learning lab develops one core task: finding and interpreting the zeros of a quadratic. A shared seed connects three differentiated versions; eight seeds provide 24 tasks. Learners choose their level, receive progressive guidance and check their understanding.'),
@@ -64,12 +64,12 @@ def footer(canvas, doc):
     canvas.line(38, 30, A4[0] - 38, 30)
     canvas.setFont('DejaVu', 6.8)
     canvas.setFillColor(MUTED)
-    canvas.drawString(38, 18, 'MURATBEK NURNIYAZ / QUADRATIC STUDIO')
+    canvas.drawString(38, 18, 'MAVLYAN ABUBAKIR / QUADRATIC STUDIO')
     canvas.drawRightString(A4[0] - 38, 18, f'{doc.page}')
 
 out = ROOT / 'public' / 'report.pdf'
 SimpleDocTemplate(str(out), pagesize=A4, rightMargin=38, leftMargin=38, topMargin=32, bottomMargin=40,
-                  title='Quadratic Studio — AI for Differentiated Learning', author='Muratbek Nurniyaz').build(story, onFirstPage=footer, onLaterPages=footer)
+                  title='Quadratic Studio — AI for Differentiated Learning', author='Mavlyan Abubakir').build(story, onFirstPage=footer, onLaterPages=footer)
 print(out)
 from shutil import copyfile
 copyfile(out, ROOT / 'public' / 'report-nurniyaz.pdf')
