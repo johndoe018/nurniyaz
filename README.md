@@ -1,8 +1,8 @@
 # Quadratic Studio
 
-**Muratbek Nurniyaz · Topic 8: AI for Differentiated Learning**
+**Mavlyan Abubakir · Topic 8: AI for Differentiated Learning**
 
-[Live website](https://johndoe018.github.io/nurniyaz/) · [Public source](https://github.com/johndoe018/nurniyaz) · [One-page report](public/report-nurniyaz.pdf)
+[Live website](https://johndoe018.github.io/abubakir/) · [Public source](https://github.com/johndoe018/abubakir) · [One-page report](public/report-nurniyaz.pdf)
 
 A responsive, interactive learning lab that transforms one quadratic-equations concept into Foundation, Standard and Advanced challenges. Includes 24 verified tasks, three hints per task, worked solutions, arithmetic-aware answer checking, an interactive graph and a real, on-device language-model integration.
 
@@ -115,7 +115,7 @@ Import the public repository with build command `npm run build` and publish dire
 - `SUBMISSION.md`: deliverables, tested capabilities and outstanding publication requirements.
 - `src/`, `index.html`, `tests/`, `package.json`, `package-lock.json`: original project source and reproducible dependencies.
 
-The deliverable was prepared with AI development assistance. Muratbek Nurniyaz is the project owner named by the requester; this does not imply unaided student authorship. Review the code, prompts and report and follow the course's disclosure rules when submitting.
+The deliverable was prepared with AI development assistance. Mavlyan Abubakir is the project owner named by the requester; this does not imply unaided student authorship. Review the code, prompts and report and follow the course's disclosure rules when submitting.
 
 ## Technology references
 
